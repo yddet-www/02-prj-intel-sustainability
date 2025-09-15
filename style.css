@@ -1,1 +1,137 @@
 /* Add your CSS here */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Intel One Mono", monospace;
+}
+
+#tip {
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hero {
+  background-color: #02204a;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  padding: 2rem;
+  gap: 4rem;
+}
+
+#intel-h-logo {
+  width: 24rem;
+  height: auto;
+}
+
+#hero-desc {
+  max-width: 40rem;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  #intel-h-logo {
+    width: auto;
+    height: auto;
+  }
+}
+
+.timeline {
+  display: flex;
+  overflow-x: scroll;
+  padding: 2rem;
+  gap: 2rem;
+  /* Hides the scrollbar for a cleaner look */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  /* Ensures cards don't shrink and maintain their width */
+  flex-wrap: nowrap;
+  scroll-snap-type: x mandatory;
+}
+
+/* Hides scrollbar in WebKit browsers (Chrome, Safari, etc.) */
+.timeline::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline > div {
+  flex-shrink: 0; /* Prevents cards from shrinking */
+  width: 25rem; /* Sets a fixed width for each card */
+  /* margin-right: 2rem; */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-height: 450px; /* Set an initial max-height that fits the un-hovered content */
+  overflow: hidden; /* This is crucial for the max-height transition to work smoothly */
+  transition: max-height 0.7s ease-in-out, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  scroll-snap-align: center;
+}
+
+.timeline > div:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  max-height: 1000px; /* A large value to accommodate the expanded content */
+}
+
+.timeline img {
+  height: 200px; /* Or any consistent height you prefer, e.g., 240px, 300px */
+  width: 100%; /* Ensures the image takes the full width of its parent container */
+  object-fit: cover; /* Crops the image to fill the container while maintaining aspect ratio */
+  display: block; /* Removes any extra space below the image */
+  margin-bottom: 1rem; /* Adds some space between the image and the text below it */
+  border: 1px solid #ccc; /* Existing subtle border */
+  border-radius: 8px; /* Add this line for rounded corners on the image */
+}
+
+.card-details {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  margin-top: 1rem;
+}
+
+/* On hover, reveal the details and change text color */
+.timeline > div:hover .card-details {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card-details h4 {
+  color: #02204a;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    flex-direction: column;
+    overflow-x: hidden; /* Disables horizontal scroll */
+    gap: 1rem;
+  }
+
+  .timeline > div {
+    width: 100%;
+    flex-shrink: 1; /* Allows cards to shrink */
+    margin: 0 auto;
+  }
+
+  .timeline > div {
+    max-height: 1000px;
+  }
+
+  .card-details {
+    opacity: 1;
+    visibility: visible;
+  }
+}
