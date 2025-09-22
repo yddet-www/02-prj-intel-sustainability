@@ -1,16 +1,24 @@
-/* Add your CSS here */
+/* Enhanced RTL-Compatible CSS */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: "Intel One Mono", monospace;
 }
+
+/* RTL-specific font stacks for better RTL language support */
+html[dir="rtl"] body {
+  font-family: "Intel One Mono", "Noto Sans Arabic", "Amiri", "Scheherazade New", monospace;
+}
+
 #tip {
-  margin-left: 2rem;
+  margin-inline-start: 2rem; /* Use logical properties */
   margin-bottom: 2rem;
 }
+
 .hero {
   background-color: #02204a;
   color: #ffffff;
@@ -21,16 +29,25 @@ body {
   padding: 2rem;
   gap: 4rem;
 }
+
 #newsletter-signup {
   background-color: #031633;
 }
+
 #intel-h-logo {
   width: 24rem;
   height: auto;
 }
+
 #hero-desc {
   max-width: 40rem;
 }
+
+/* RTL support for hero section */
+html[dir="rtl"] .hero {
+  text-align: right;
+}
+
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -41,6 +58,7 @@ body {
     height: auto;
   }
 }
+
 .timeline {
   display: flex;
   overflow-x: scroll;
@@ -53,10 +71,22 @@ body {
   flex-wrap: nowrap;
   scroll-snap-type: x mandatory;
 }
+
+/* RTL timeline direction */
+html[dir="rtl"] .timeline {
+  direction: ltr; /* Keep timeline cards flowing left-to-right for chronological order */
+}
+
+html[dir="rtl"] .timeline > div {
+  direction: rtl; /* But content inside cards should be RTL */
+  text-align: right;
+}
+
 /* Hides scrollbar in WebKit browsers (Chrome, Safari, etc.) */
 .timeline::-webkit-scrollbar {
   display: none;
 }
+
 .timeline > div {
   flex-shrink: 0;
   width: 25rem; /* Sets a fixed width for each card */
@@ -70,29 +100,32 @@ body {
   scroll-snap-align: center;
   position: relative; /* Required for overlay positioning */
 }
+
 .timeline > div:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
 .timeline img {
-  height: 200px; /* Or any consistent height you prefer, e.g., 240px, 300px */
-  width: 100%; /* Ensures the image takes the full width of its parent container */
-  object-fit: cover; /* Crops the image to fill the container while maintaining aspect ratio */
-  display: block; /* Removes any extra space below the image */
-  margin-bottom: 1rem; /* Adds some space between the image and the text below it */
-  border: 1px solid #ccc; /* Existing subtle border */
-  border-radius: 8px; /* Add this line for rounded corners on the image */
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
+
 .card-details {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #02204a; /* Dark blue background */
-  color: white; /* White text */
+  background-color: #02204a;
+  color: white;
   padding: 1.5rem;
-  border-radius: 12px; /* Match the card's border radius */
+  border-radius: 12px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -102,20 +135,30 @@ body {
   align-items: center;
   text-align: center;
 }
+
+/* RTL support for card details */
+html[dir="rtl"] .card-details {
+  text-align: center; /* Keep centered for overlay */
+}
+
 /* On hover, reveal the overlay */
 .timeline > div:hover .card-details {
   opacity: 1;
   visibility: visible;
 }
+
 .card-details h4 {
-  color: white; /* Ensure heading is white */
+  color: white;
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
+
 .card-details p {
   font-size: 0.95rem;
   line-height: 1.4;
 }
+
+/* Enhanced hover effects with RTL support */
 .hover-text-white:hover {
   color: white !important;
   transition: color 0.3s ease;
@@ -129,28 +172,119 @@ body {
   color: #ffffff !important;
 }
 
-/* Focus styles for better accessibility */
-.footer a:focus {
+/* Enhanced focus styles for better accessibility in both LTR and RTL */
+.footer a:focus,
+html[dir="rtl"] .footer a:focus {
   outline: 2px solid #0d6efd;
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* RTL support for social media icons */
-[dir="rtl"] .d-flex.gap-3 {
+/* Form focus indicators for RTL */
+html[dir="rtl"] .form-control:focus,
+html[dir="rtl"] .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Social media icons should maintain LTR order */
+.social-media-container {
+  direction: ltr !important;
+}
+
+html[dir="rtl"] .d-flex.gap-3 {
   direction: ltr;
 }
+
+/* Bootstrap form RTL enhancements */
+html[dir="rtl"] .form-check {
+  text-align: right;
+  padding-right: 1.5em;
+  padding-left: 0;
+}
+
+html[dir="rtl"] .form-check-input {
+  margin-right: -1.5em;
+  margin-left: 0;
+  float: right;
+}
+
+html[dir="rtl"] .form-check-label {
+  padding-right: 0.5rem;
+  padding-left: 0;
+}
+
+/* RTL support for navigation lists */
+html[dir="rtl"] .list-inline {
+  text-align: left; /* Keep legal links left-aligned even in RTL */
+}
+
+html[dir="rtl"] .list-inline-item {
+  padding-right: 0.5rem;
+  padding-left: 0;
+}
+
+html[dir="rtl"] .list-inline-item:not(:last-child) {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+/* RTL button alignment */
+html[dir="rtl"] .btn {
+  text-align: center;
+}
+
+/* Contact information RTL support */
+html[dir="rtl"] .contact-info {
+  text-align: right;
+}
+
+/* SVG icons in contact section */
+html[dir="rtl"] .me-2 {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* RTL-specific utilities */
+.rtl-text-right {
+  text-align: right;
+}
+
+.rtl-text-left {
+  text-align: left;
+}
+
+html[dir="rtl"] .rtl-text-right {
+  text-align: right;
+}
+
+html[dir="rtl"] .rtl-text-left {
+  text-align: left;
+}
+
+/* Mobile RTL adjustments */
 @media (max-width: 768px) {
   .timeline {
     flex-direction: column;
-    overflow-x: hidden; /* Disables horizontal scroll */
+    overflow-x: hidden;
     gap: 1rem;
   }
+  
   .timeline > div {
     width: 100%;
-    flex-shrink: 1; /* Allows cards to shrink */
+    flex-shrink: 1;
     margin: 0 auto;
-    height: auto; /* Allow auto height on mobile */
+    height: auto;
   }
+  
+  html[dir="rtl"] .timeline {
+    direction: rtl; /* On mobile, allow natural RTL flow */
+  }
+  
+  html[dir="rtl"] .timeline > div {
+    direction: rtl;
+    text-align: right;
+  }
+  
   /* Show overlay content by default on mobile */
   .card-details {
     position: static;
@@ -163,8 +297,60 @@ body {
     border-radius: 8px;
     border: 2px solid #02204a;
   }
+  
   .card-details h4 {
     color: #02204a;
     margin-bottom: 0.5rem;
   }
+  
+  html[dir="rtl"] .card-details {
+    text-align: right;
+  }
+}
+
+/* Print styles with RTL support */
+@media print {
+  html[dir="rtl"] body {
+    direction: rtl;
+  }
+  
+  html[dir="rtl"] .timeline > div {
+    page-break-inside: avoid;
+    text-align: right;
+  }
+}
+
+/* Animation and transition adjustments for RTL */
+html[dir="rtl"] .timeline > div:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Ensure consistent spacing in RTL */
+html[dir="rtl"] .container {
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+}
+
+/* RTL-specific Bootstrap overrides */
+html[dir="rtl"] .text-lg-end {
+  text-align: right !important;
+}
+
+html[dir="rtl"] .text-end {
+  text-align: right !important;
+}
+
+/* Language-specific adjustments */
+html[lang="ar"] body,
+html[lang="he"] body,
+html[lang="fa"] body,
+html[lang="ur"] body {
+  font-family: "Noto Sans Arabic", "Amiri", "Scheherazade New", "Intel One Mono", sans-serif;
+  line-height: 1.6; /* Better line spacing for RTL languages */
+}
+
+/* Ensure proper text rendering for RTL languages */
+html[dir="rtl"] {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga", "kern";
 }
