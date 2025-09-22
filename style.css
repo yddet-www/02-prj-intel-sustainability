@@ -4,16 +4,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: "Intel One Mono", monospace;
 }
-
 #tip {
   margin-left: 2rem;
   margin-bottom: 2rem;
 }
-
 .hero {
   background-color: #02204a;
   color: #ffffff;
@@ -24,16 +21,16 @@ body {
   padding: 2rem;
   gap: 4rem;
 }
-
+#newsletter-signup {
+  background-color: #031633;
+}
 #intel-h-logo {
   width: 24rem;
   height: auto;
 }
-
 #hero-desc {
   max-width: 40rem;
 }
-
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -44,7 +41,6 @@ body {
     height: auto;
   }
 }
-
 .timeline {
   display: flex;
   overflow-x: scroll;
@@ -57,34 +53,27 @@ body {
   flex-wrap: nowrap;
   scroll-snap-type: x mandatory;
 }
-
 /* Hides scrollbar in WebKit browsers (Chrome, Safari, etc.) */
 .timeline::-webkit-scrollbar {
   display: none;
 }
-
 .timeline > div {
-  flex-shrink: 0; /* Prevents cards from shrinking */
+  flex-shrink: 0;
   width: 25rem; /* Sets a fixed width for each card */
-  /* margin-right: 2rem; */
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   padding: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-height: 450px; /* Set an initial max-height that fits the un-hovered content */
-  overflow: hidden; /* This is crucial for the max-height transition to work smoothly */
-  transition: max-height 0.7s ease-in-out, transform 0.3s ease,
-    box-shadow 0.3s ease;
+  height: 520px; /* Set a fixed height instead of max-height */
+  overflow: hidden;
   scroll-snap-align: center;
+  position: relative; /* Required for overlay positioning */
 }
-
 .timeline > div:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  max-height: 1000px; /* A large value to accommodate the expanded content */
 }
-
 .timeline img {
   height: 200px; /* Or any consistent height you prefer, e.g., 240px, 300px */
   width: 100%; /* Ensures the image takes the full width of its parent container */
@@ -94,44 +83,88 @@ body {
   border: 1px solid #ccc; /* Existing subtle border */
   border-radius: 8px; /* Add this line for rounded corners on the image */
 }
-
 .card-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #02204a; /* Dark blue background */
+  color: white; /* White text */
+  padding: 1.5rem;
+  border-radius: 12px; /* Match the card's border radius */
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease;
-  margin-top: 1rem;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-
-/* On hover, reveal the details and change text color */
+/* On hover, reveal the overlay */
 .timeline > div:hover .card-details {
   opacity: 1;
   visibility: visible;
 }
-
 .card-details h4 {
-  color: #02204a;
-  margin-bottom: 0.5rem;
+  color: white; /* Ensure heading is white */
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+.card-details p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.hover-text-white:hover {
+  color: white !important;
+  transition: color 0.3s ease;
 }
 
+.footer-link {
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff !important;
+}
+
+/* Focus styles for better accessibility */
+.footer a:focus {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* RTL support for social media icons */
+[dir="rtl"] .d-flex.gap-3 {
+  direction: ltr;
+}
 @media (max-width: 768px) {
   .timeline {
     flex-direction: column;
     overflow-x: hidden; /* Disables horizontal scroll */
     gap: 1rem;
   }
-
   .timeline > div {
     width: 100%;
     flex-shrink: 1; /* Allows cards to shrink */
     margin: 0 auto;
+    height: auto; /* Allow auto height on mobile */
   }
-
-  .timeline > div {
-    max-height: 1000px;
-  }
-
+  /* Show overlay content by default on mobile */
   .card-details {
+    position: static;
+    background-color: #f8f9fa;
+    color: #02204a;
     opacity: 1;
     visibility: visible;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid #02204a;
+  }
+  .card-details h4 {
+    color: #02204a;
+    margin-bottom: 0.5rem;
   }
 }
